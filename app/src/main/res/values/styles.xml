@@ -1,0 +1,27 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AnimLandscapeDialogFragment" parent="android:Animation">
+        <item name = "android:windowEnterAnimation">@anim/anim_landscape_enter</item>
+        <item name = "android:windowExitAnimation">@anim/anim_landscape_exit</item>
+    </style>
+
+    <style name="AnimPortraitDialogFragment" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/anim_portrait_enter</item>
+        <item name="android:windowExitAnimation">@anim/anim_portrait_exit</item>
+    </style>
+
+    <style name="CustomizedDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimAmount">0.0</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+</resources>
