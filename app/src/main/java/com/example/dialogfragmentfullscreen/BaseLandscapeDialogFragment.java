@@ -2,6 +2,7 @@ package com.example.dialogfragmentfullscreen;
 
 import android.accessibilityservice.AccessibilityService;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -37,7 +38,18 @@ public abstract class BaseLandscapeDialogFragment extends DialogFragment {
         mDialog.getWindow().setWindowAnimations(R.style.AnimLandscapeDialogFragment);
         mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mDialog.setCanceledOnTouchOutside(true);
+        mDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);//不让DialogFragment获得焦点，导航栏不会弹出
 
+        mDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+                int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
+                        |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+                mDialog.getWindow().getDecorView().setSystemUiVisibility(uiOptions);
+            }
+        });
         return view;
     }
 
@@ -59,8 +71,8 @@ public abstract class BaseLandscapeDialogFragment extends DialogFragment {
         mDialog.getWindow().setAttributes(layoutParams);
 
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
-                |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-//                |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+//                |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         mDialog.getWindow().getDecorView().setSystemUiVisibility(uiOptions);
     }
 
