@@ -61,7 +61,7 @@ public abstract class BaseLandscapeDialogFragment extends DialogFragment {
 
         //以下两行可以调整DialogFragment弹出时，背景是否可见。背景在这里指的是DialogFragment所在的activity
         //dimAmount的范围为0.0f-1.0f，0.0f表示背景完全可见，1.0f表示背景完全不可见。
-//        layoutParams.dimAmount = 0;
+//        layoutParams.dimAmount = 0.5f;
 //        layoutParams.flags|=WindowManager.LayoutParams.FLAG_DIM_BEHIND;
 
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
