@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,7 @@ import android.view.WindowManager;
 import androidx.fragment.app.DialogFragment;
 
 public abstract class BaseLandscapeDialogFragment extends DialogFragment {
-
+    private static final String TAG = "BaseDialogFragment";
     Dialog mDialog;
     int layoutID;
     int styleID;
@@ -38,8 +39,9 @@ public abstract class BaseLandscapeDialogFragment extends DialogFragment {
         mDialog.getWindow().setWindowAnimations(R.style.AnimLandscapeDialogFragment);
         mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mDialog.setCanceledOnTouchOutside(true);
-        mDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);//不让DialogFragment获得焦点，导航栏不会弹出
 
+
+        mDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);//不让DialogFragment获得焦点，导航栏不会弹出
         mDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
@@ -48,32 +50,28 @@ public abstract class BaseLandscapeDialogFragment extends DialogFragment {
                         |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
                 mDialog.getWindow().getDecorView().setSystemUiVisibility(uiOptions);
+
             }
         });
+        Log.i(TAG,"onCreateView");
         return view;
     }
 
     @Override
     public void onStart(){
-        super.onStart();
-
-        WindowManager.LayoutParams layoutParams = mDialog.getWindow().getAttributes();
-
         //以下两行可以调整DialogFragment弹出时，背景是否可见。背景在这里指的是DialogFragment所在的activity
         //dimAmount的范围为0.0f-1.0f，0.0f表示背景完全可见，1.0f表示背景完全不可见。
 //        layoutParams.dimAmount = 0.5f;
 //        layoutParams.flags|=WindowManager.LayoutParams.FLAG_DIM_BEHIND;
 
+
+        WindowManager.LayoutParams layoutParams = mDialog.getWindow().getAttributes();
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
         layoutParams.gravity = Gravity.RIGHT;
-
         mDialog.getWindow().setAttributes(layoutParams);
-
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
-//                |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-        mDialog.getWindow().getDecorView().setSystemUiVisibility(uiOptions);
+        Log.i(TAG,"onStart");
+        super.onStart();
     }
 
 

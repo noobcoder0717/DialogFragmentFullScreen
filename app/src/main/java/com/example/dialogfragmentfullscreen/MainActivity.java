@@ -23,13 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         context = this.getApplicationContext();
-        //设置全屏
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //隐藏导航栏
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;//
-        getWindow().getDecorView().setSystemUiVisibility(uiOptions);
 
         btn_showfragment = findViewById(R.id.btn_show_fragment);
         btn_showfragment.setOnClickListener(new View.OnClickListener() {
