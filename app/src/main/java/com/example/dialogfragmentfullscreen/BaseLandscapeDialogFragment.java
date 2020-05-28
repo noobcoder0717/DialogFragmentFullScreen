@@ -46,11 +46,6 @@ public abstract class BaseLandscapeDialogFragment extends DialogFragment {
             @Override
             public void onShow(DialogInterface dialog) {
                 getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-                int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
-                        |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-                mDialog.getWindow().getDecorView().setSystemUiVisibility(uiOptions);
-
             }
         });
         Log.i(TAG,"onCreateView");
@@ -63,6 +58,10 @@ public abstract class BaseLandscapeDialogFragment extends DialogFragment {
         //dimAmount的范围为0.0f-1.0f，0.0f表示背景完全可见，1.0f表示背景完全不可见。
 //        layoutParams.dimAmount = 0.5f;
 //        layoutParams.flags|=WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
+                |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        mDialog.getWindow().getDecorView().setSystemUiVisibility(uiOptions);
 
 
         WindowManager.LayoutParams layoutParams = mDialog.getWindow().getAttributes();
